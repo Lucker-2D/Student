@@ -1,0 +1,107 @@
+package task3;
+
+public class StudentCollection {
+    
+    // Массив для хранения объектов класса Student
+    public Student[] students;
+
+    // Счетчик для отслеживания количества добавленных студентов
+    private int studentCount;
+
+    // Конструктор класса StudentCollection
+    public StudentCollection() {
+        this.students = new Student[100]; // Инициализация массива на 100 студентов
+        studentCount = 0; // Начальное значение счетчика студентов
+    }
+
+    /*
+    * Метод для добавления студента в коллекцию.
+    * Перегрузка метода (overloading).
+    */
+    
+    // Добавляет студента, используя только имя и id
+    public void addStudent(String name, int id) {
+        Student student = new Student(name, id); // Создание нового студента
+        this.students[studentCount] = student; // Сохранение студента в массив
+        studentCount++; // Увеличение счетчика студентов
+    }
+
+    // Добавляет студента с указанием имени, id и баллов
+    public void addStudent(String name, int id, int point) {
+        Student student = new Student(name, id, point); // Создание нового студента
+        this.students[studentCount] = student; // Сохранение студента в массив
+        studentCount++; // Увеличение счетчика студентов
+    }
+
+    // Метод для поиска студента по его уникальному идентификатору (id)
+    public Student searchStudentById(int id) {
+        Student result = null; // Переменная для хранения результата
+        for (int i = 0; i < this.students.length; i++) { // Проходим по массиву студентов
+            if (this.students[i].getId() == id) { // Если найден студент с данным id
+                result = this.students[i]; // Сохраняем найденного студента
+                break; // Выходим из цикла, так как студент найден
+            }
+        }
+        return result; // Возвращаем найденного студента или null, если не найден
+    }
+
+    // Метод для поиска студентов по имени
+    public Student[] searchStudentByName(String name) {
+        int count = 0; // Счетчик для найденных студентов с данным именем
+        // Сначала проходим по массиву и считаем количество студентов с данным именем
+        for (int i = 0; i < this.students.length; i++) {
+            if (this.students[i].getName().equals(name)) { // Сравниваем имена
+                count++; // Увеличиваем счетчик
+            }
+        }
+        Student[] result = new Student[count]; // Создаем массив для хранения найденных студентов
+        int countAlreadyAddedInResult = 0; // Счетчик для добавленных студентов в результат
+        // Заполняем массив найденными студентами
+        for (int i = 0; i < this.students.length; i++) {
+            if (this.students[i].getName().equals(name)) { // Если имя совпадает
+                result[countAlreadyAddedInResult] = this.students[i]; // Добавляем студента в массив результата
+                countAlreadyAddedInResult++; // Увеличиваем счетчик
+            }
+        }
+        return result; // Возвращаем массив найденных студентов
+    }
+
+    // Метод для обновления оценки студента по его id
+    public void updateStudentGrade(int id, int point) {
+        Student student = searchStudentById(id); // Ищем студента по id
+        student.setPoint(point); // Устанавливаем новую оценку
+    }
+
+    // Метод для обновления оценки студента по имени
+    public void updateStudentGrade(String name, int point) {
+        Student[] studentsByName = searchStudentByName(name); // Ищем студентов по имени
+        for (int i = 0; i < studentsByName.length; i++) { // Проходим по найденным студентам
+            Student student = studentsByName[i]; // Берем текущего студента
+            student.setPoint(point); // Устанавливаем новую оценку
+        }
+    }
+
+    // Метод для отображения всех студентов
+    public Student[] displayAllStudents() {
+        return students; // Возвращаем массив студентов
+    }
+
+    // Метод для вычисления средней оценки студентов
+    public double getAverageGrade() {
+        int studentCountWithValidPoint = 0; // Счетчик студентов с валидными оценками
+        int sumOfPoints = 0; // Сумма оценок
+        // Проходим по массиву студентов
+        for (int i = 0; i < students.length; i++) {
+            if (students[i].getPoint() != -1) { // Проверяем, что оценка валидная
+                sumOfPoints += students[i].getPoint(); // Добавляем оценку к сумме
+                studentCountWithValidPoint++; // Увеличиваем счетчик валидных оценок
+            }
+        }
+        if (studentCountWithValidPoint == 0) { // Проверяем, есть ли валидные оценки
+            return 0; // Если нет, возвращаем 0
+        }
+        // Вычисляем среднюю оценку
+        double average = (double) sumOfPoints / studentCountWithValidPoint;
+        return average; // Возвращаем среднюю оценку
+    }
+}
