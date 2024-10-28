@@ -1,0 +1,61 @@
+package task3;
+
+public class Main {
+    public static void main(String[] args) {
+        StudentCollection studentCollection = new StudentCollection();
+
+        System.out.println();
+        // Добавление студентов
+        studentCollection.addStudent("Alice", 1, 77);
+        studentCollection.addStudent("Bob", 2, 85);
+        studentCollection.addStudent("Alice", 3, 90);
+
+        // Поиск студента по ID
+        Student studentById = studentCollection.searchStudentById(2);
+        if (studentById != null) {
+            System.out.println("Найден студент по ID 2: " + studentById.getName() + ", Оценка: " + studentById.getPoint());
+        } else {
+            System.out.println("Студент с ID 2 не найден.");
+        }
+
+System.out.println();
+
+        // Поиск студентов по имени
+        Student[] studentsByName = studentCollection.searchStudentByName("Alice");
+        System.out.println("Найдено студентов с именем Alice: " + studentsByName.length);
+        for (Student student : studentsByName) {
+            System.out.println("ID: " + student.getId() + ", Оценка: " + student.getPoint());
+        }
+
+        System.out.println();
+
+        // Обновление оценки студента по ID
+        studentCollection.updateStudentGrade(1, 75);
+        System.out.println("Новая оценка студента с ID 1: " + studentCollection.searchStudentById(1).getPoint());
+
+
+        System.out.println();
+
+        // Обновление оценки студента по имени
+        studentCollection.updateStudentGrade("Alice", 95);
+        System.out.println("Обновлённые оценки студентов с именем Alice:");
+        for (Student student : studentCollection.searchStudentByName("Alice")) {
+            System.out.println("ID: " + student.getId() + ", Оценка: " + student.getPoint());
+        }
+
+        System.out.println();
+
+        // Показ всех студентов
+        System.out.println("Все студенты:");
+        for (Student student : studentCollection.displayAllStudents()) {
+            if (student != null) {
+                System.out.println("ID: " + student.getId() + ", Имя: " + student.getName() + ", Оценка: " + student.getPoint());
+            }
+        }
+
+        System.out.println();
+        // Средняя оценка
+        double averageGrade = studentCollection.getAverageGrade();
+        System.out.println("Средняя оценка всех студентов: " + averageGrade);
+    }
+}
