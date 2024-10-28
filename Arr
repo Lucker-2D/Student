@@ -1,0 +1,105 @@
+
+import java.util.Arrays;
+
+public class Main {
+
+    //დაწერეთ მეთოდი, რომელსაც გადაეცემა მასივი და დააბრუნებს ამ მასივში შემავალი სამი უდიდესი რიცხვის ნამრავლს.
+
+    public int Mult(int[] arr){
+        Arrays.sort(arr);
+        int mult = arr[arr.length-1]*arr[arr.length-2]* arr[arr.length-3];
+        return mult;
+    }
+
+    public int Big(int[] arr){
+        Arrays.sort(arr);
+        return arr[arr.length-1];
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {7, 2, 4, 8, 9, 1};
+        Main main = new Main();
+        System.out.println("The 3 biggest arrays multiply is: " + main.Mult(arr));
+        System.out.println("The biggest array is: " + main.Big(arr));
+    }
+}
+
+/*
+    // Сумма трёх наименьших чисел: Напишите метод, который принимает массив
+    // и возвращает сумму трех наименьших чисел в массиве.
+
+    public int Min(int[] data){
+        Arrays.sort(data);
+        int ans = data[0] + data[1] + data[2];
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        int[] data = {1, 4, 6, 3, 7};
+        Test_1 t = new Test_1();
+        System.out.println(t.Min(data));
+    }
+ */
+/*
+    // Поиск второго по величине числа: Напишите метод,
+    // который находит второе по величине число в массиве.
+
+
+    public int Sec(int[] data){
+        Arrays.sort(data);
+        int ans = data[data.length-2];
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        int[] data = {1, 4, 6, 3, 7};
+        Test_1 t = new Test_1();
+        System.out.println(t.Sec(data));
+    }
+
+ */
+
+/*
+    //Наибольшая сумма подряд идущих чисел: Метод принимает массив и возвращает наибольшую сумму,
+    // которую можно получить из трех подряд идущих чисел.
+
+    public static int maxSumOfThreeConsecutive(int[] arr) {
+
+        int maxSum = 0;
+        for (int i = 0; i < arr.length-2; i++) {
+            if(arr[i]+arr[i+1]+arr[i+2] > maxSum) {
+                maxSum = arr[i]+arr[i+1]+arr[i+2];
+            }
+        }
+    return maxSum;
+    }
+
+    public static void main(String[] args) {
+        int[] data = {2, 4, 7, 1, 5, 9, 3};
+
+        int res = maxSumOfThreeConsecutive(data);
+        System.out.println("The greatest sum of three consecutive numbers: " + res);
+    }
+}
+ */
+/*
+    // Проверка уникальности чисел: Напишите метод, который проверяет,
+    // все ли числа в массиве уникальны (не повторяются).
+
+    public String Unic(int[] data) {
+        Arrays.sort(data);
+        for (int i = 0; i < data.length-1; i++) {
+            if (data[i] == data[i+1]){
+                return "NOT";
+            }
+        }
+        return "YES";
+    }
+
+    public static void main(String[] args) {
+        int[] data = {2, 4, 7, 1, 5, 9, 3};
+        Test_1 t = new Test_1();
+        System.out.println(t.Unic(data));
+    }
+}
+ */
